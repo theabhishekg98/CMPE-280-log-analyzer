@@ -195,23 +195,6 @@ const Login = ({ ...props }) => {
             </Button>
           </Grid>
         </form>
-        <Grid item>
-          <div
-            style={{
-              height: "28px",
-              fontFamily: "Work Sans",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "18px",
-              lineHeight: "27px",
-              color: "#000000",
-              opacity: 0.5,
-              marginTop: "25px",
-            }}
-          >
-            Or Sign In with:
-          </div>
-        </Grid>
         <Stack sx={{ width: "100%" }}>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert
