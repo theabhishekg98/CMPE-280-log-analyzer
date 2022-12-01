@@ -81,7 +81,6 @@ export default function VideoLibrary(props) {
   });
 
   useEffect(() => {
-    console.log("useEffect called");
     const getWeather = async () => {
       try {
         const res = await axios.get(
@@ -197,14 +196,22 @@ export default function VideoLibrary(props) {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="center">{row.logId}</TableCell>
-                    <TableCell align="center">{row.level}</TableCell>
-                    <TableCell align="center">{row.escalation}</TableCell>
-                    <TableCell align="center">{row.status}</TableCell>
                     <TableCell align="center"><span style={{
-                          borderRadius: "5px",
-                          backgroundColor: "red",
-                          padding: "3px"
-                        }}>{row.priority}</span></TableCell>
+                      borderRadius: "5px",
+                      backgroundColor: row.levelColor,
+                      padding: "3px",
+                      display: "inline-block",
+                      width: "55px"
+                    }}>{row.level}</span></TableCell>
+                    <TableCell align="center"><span style={{
+                      borderRadius: "5px",
+                      backgroundColor: row.escalationColor,
+                      padding: "3px",
+                      display: "inline-block",
+                      width: "55px"
+                    }}>{row.escalation}</span></TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">{row.priority}</TableCell>
                     <TableCell align="center">{row.timestamp}</TableCell>
                   </TableRow>
                 ))}
