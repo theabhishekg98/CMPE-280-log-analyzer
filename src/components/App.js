@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Login from "../components/Login";
+import Dashboard from "../components/Dashboard";
 // import PrivateRoute from "../components/utility/PrivateRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Dashboard from "./Dashboard";
@@ -14,6 +15,7 @@ function App() {
     <Router>
         <Routes>
           <Route path="/" element={<Login/ >}></Route>
+          <Route path="/dashboard" element={<Dashboard/ >}></Route>
           {/* <Route path="/reset" component={ForgetPassword}></Route>
           <Route path="/dashboard">
             <PrivateRoute claim="verified">
