@@ -200,14 +200,11 @@ export default function VideoLibrary(props) {
                     <TableCell align="center">{row.level}</TableCell>
                     <TableCell align="center">{row.escalation}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
-                    <TableCell align="center" style={{
-                          padding:"0px !important",
-                          
+                    <TableCell align="center"><span style={{
                           borderRadius: "5px",
                           backgroundColor: "red",
-                        }}>
-                      {row.priority}
-                    </TableCell>
+                          padding: "3px"
+                        }}>{row.priority}</span></TableCell>
                     <TableCell align="center">{row.timestamp}</TableCell>
                   </TableRow>
                 ))}
