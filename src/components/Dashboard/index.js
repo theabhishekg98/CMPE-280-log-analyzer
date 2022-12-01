@@ -3,7 +3,6 @@ import Navbar from "../Navbar";
 import Sidebar from "./Sidebar";
 import VideoLibrary from "./VideoLibrary";
 import { useState, useEffect } from "react";
-import { useAuth } from "../AuthContext";
 
 
 const Dashboard = () => {
@@ -14,7 +13,6 @@ const Dashboard = () => {
   const [thumbnailURI, setThumbnailURI] = useState(null);
   const [serverId, setServerId] = useState(0);
   const [open, setOpen] = useState(false);
-  const {  currentUser } = useAuth();
 
 
   return (
