@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 
 const Dashboard = () => {
   const [itemData, setItemData] = useState(null);
-  const [searchKeyword, setSearchKeyword] = useState("");
   const [uploadModal, setUploadModal] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [fileName, setFileName] = useState(null);
@@ -43,7 +42,6 @@ const Dashboard = () => {
           </Grid>
           <Grid item container>
             <VideoLibrary
-              setSearchKeyword={setSearchKeyword}
               itemData={itemData}
               uploadModal={uploadModal}
               uploadPercentage={uploadPercentage}
