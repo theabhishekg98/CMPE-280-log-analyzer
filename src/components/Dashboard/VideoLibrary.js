@@ -100,12 +100,12 @@ export default function VideoLibrary(props) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">{"Log Id"}</TableCell>
-            <TableCell align="right">{"Level"}</TableCell>
-            <TableCell align="right">{"Escalation"}</TableCell>
-            <TableCell align="right">{"Status"}</TableCell>
-            <TableCell align="right">{"Priority"}</TableCell>
-            <TableCell align="right">{"Timestamp"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Log Id"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Level"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Escalation"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Status"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Priority"}</TableCell>
+            <TableCell style={{fontWeight:700}} align="right">{"Timestamp"}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
