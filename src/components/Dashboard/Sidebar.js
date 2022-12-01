@@ -1,4 +1,4 @@
-import { Typography, Modal, Button, Grid, Box} from "@mui/material";
+import { TextField, Typography, Modal, Button, Grid, Box} from "@mui/material";
 import playCircle from "../../assets/play-circle.svg";
 import trashIcon from "../../assets/trash.svg";
 import placeholder from "../../assets/placeholder.png";
@@ -13,10 +13,18 @@ const Sidebar = (props) => {
   const [data,setData] = React.useState(() => {
     axios.get("http://localhost:8000/servers?userId=0")
       .then(res => setData(res.data.data))
- });
+  });
+
+  function addServer(){
+    console.log(serverIP);
+    console.log(serverName);
+    console.log(serverPriority);
+  }
 
  const [open, setOpen] = React.useState(false);
-
+ const [serverIP, setServerIP] = React.useState();
+ const [serverName, setServerName] = React.useState();
+ const [serverPriority, setServerPriority] = React.useState();
   return (
     <Grid item container direction="column">
       <Grid item container direction="row" style={{ marginTop: "83px" }}>
@@ -94,12 +102,37 @@ const Sidebar = (props) => {
                 boxShadow: 24,
                 p: 4,
               }}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Text in a modal
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography>
+                <Typography style={{
+                  fontStyle:"bold",
+                  color: "black",
+                  fontWeight: 500,
+                }}>Server Details</Typography>
+                <Grid container
+                direction="column"
+                alignItems="center"
+                >
+                <Grid item
+                style={{
+                  margin:"10px"
+                }}>
+                <TextField id="serverIP" label="Server IP" variant="outlined" onChange={(e) => { setServerIP(e.target.value); }} />
+                </Grid>
+                <Grid item style={{
+                  margin:"10px"
+                }}>
+                <TextField id="serverName" label="Server Name" variant="outlined" onChange={(e) => { setServerName(e.target.value); }} />
+                </Grid>
+                <Grid item style={{
+                  margin:"10px"
+                }}>
+                <TextField id="serverPriority" label="Server Priority" variant="outlined" onChange={(e) => { setServerPriority(e.target.value); }} />
+                </Grid>
+                </Grid>
+                <Button
+                  variant="contained"
+                  onClick={()=> addServer()}>
+                  Add
+                </Button>
               </Box>
             </Modal>  
       </Grid>
