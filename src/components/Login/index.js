@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useAuth } from "../AuthContext";
-import axios from 'axios';
+import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -25,27 +25,28 @@ const Login = ({ ...props }) => {
     setOpen(false);
   };
 
-  const {  setCurrentUser } = useAuth();
+  const { setCurrentUser } = useAuth();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/users/sign_in', {
-      username: email,
-      password: password
-    })
-    .then(function (response) {
-      debugger;
-      console.log(response);
-      setCurrentUser(email);
-      window.location.href = "/dashboard";
-    })
-    .catch(function (error) {
-      debugger;
-      console.log(error);
-    });
+    axios
+      .post("http://localhost:8000/users/sign_in", {
+        username: email,
+        password: password,
+      })
+      .then(function (response) {
+        // debugger;
+        console.log(response);
+        setCurrentUser(email);
+        window.location.href = "/dashboard";
+      })
+      .catch(function (error) {
+        // debugger;
+        console.log(error);
+      });
   };
 
   return (
