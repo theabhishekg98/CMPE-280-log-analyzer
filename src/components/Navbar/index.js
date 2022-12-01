@@ -4,8 +4,11 @@ import { Typography, Grid } from "@mui/material";
 import ProfileIconData from "./ProfileIconData";
 import { useState } from "react";
 import placeholder from "../../assets/placeholder.png";
+import { useAuth } from "../AuthContext";
 
 const Navbar = ({ isBlack }) => {
+  const { currentUser } = useAuth();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const backgroundColor = isBlack ? "#171717" : "#FFFFFF";

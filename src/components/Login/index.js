@@ -7,14 +7,13 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useAuth } from "../AuthContext";
+import axios from 'axios';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Login = ({ ...props }) => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
   const [open, setOpen] = useState(false);
 
   const errorMessage = props?.location?.state?.errorMessage;
@@ -26,17 +25,26 @@ const Login = ({ ...props }) => {
     setOpen(false);
   };
 
-  const { login } = useAuth();
+  const {  setCurrentUser } = useAuth();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const handleSubmit = (e) => {
-    login(email, password)
-    .then(() => {
+    e.preventDefault();
+    axios.post('http://localhost:8000/users/sign_in', {
+      username: email,
+      password: password
+    })
+    .then(function (response) {
       debugger;
-      console.log("Success?");
+      console.log(response);
+      setCurrentUser(email);
       window.location.href = "/dashboard";
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(function (error) {
+      debugger;
+      console.log(error);
     });
   };
 
@@ -134,7 +142,6 @@ const Login = ({ ...props }) => {
               type="email"
               autoComplete="email"
               placeholder="Email Address"
-              value={email}
               style={{
                 width: "395px",
                 height: "67px",

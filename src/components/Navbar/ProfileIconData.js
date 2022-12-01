@@ -6,12 +6,10 @@ import logoutIcon from "../../assets/log-out.svg";
 const ProfileIconData = (props) => {
   // const { logout } = useAuth();
 
-  // const handleLogout = (e) => {
-  //   e.preventDefault();
-  //   logout();
-  //   localStorage.clear();
-  //   window.location.href = "/login";
-  // };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    window.location.href = "/login";
+  };
 
   return (
     <React.Fragment>
@@ -48,7 +46,7 @@ const ProfileIconData = (props) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Link to="#" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <MenuItem
             style={{
               fontFamily: "Work Sans",

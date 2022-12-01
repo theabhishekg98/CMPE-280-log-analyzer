@@ -15,6 +15,7 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { Chart } from "react-google-charts";
 import TablePagination from "@mui/material/TablePagination";
+import { useAuth } from "../AuthContext";
 
 export default function VideoLibrary(props) {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -22,6 +23,7 @@ export default function VideoLibrary(props) {
   const [orderBy, setOrderBy] = React.useState("logId");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { currentUser } = useAuth();
 
 
   useEffect(() => {
