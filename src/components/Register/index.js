@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Image52 from "../../assets/image-5-2@2x.png";
-import Image42 from "../../assets/image-4-2@2x.png";
 import UndrawImage from "../../assets/undraw-in-thought-re-qyxl-1-2@2x.png";
 import { whiteLogo } from "../utility/constants";
 import { TextField, Typography, Button, Grid } from "@mui/material";
-// import { useAuth } from "../contexts/AuthContext";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import { doc, getDoc, deleteDoc, collection, addDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import arrowUp from "../../assets/arrow-up.svg";
 
@@ -87,17 +83,32 @@ const Register = () => {
         lg={4.5}
         xl={4.5}
       >
-        <Grid item style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+        <Grid
+          item
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <img
             src={whiteLogo}
             style={{
               width: "112.58px",
               height: "112.93px",
               cursor: "pointer",
-              marginTop: "14.27px"
+              marginTop: "14.27px",
             }}
           />
-          <h1  style={{display: "inline-block", verticalAlign: 'middle', fontSize: "50px"}}>Loggle</h1>
+          <h1
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              fontSize: "50px",
+            }}
+          >
+            Loggle
+          </h1>
         </Grid>
         <Grid item>
           <span
@@ -109,7 +120,7 @@ const Register = () => {
               color: "#000000",
             }}
           >
-           Real Time Log Analytics
+            Real Time Log Analytics
           </span>
         </Grid>
         <Grid item>
@@ -197,7 +208,7 @@ const Register = () => {
             </Button>
           </Grid>
         </form>
-                <Grid
+        <Grid
           item
           container
           direction="row"

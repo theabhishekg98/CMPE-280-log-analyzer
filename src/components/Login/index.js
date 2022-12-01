@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-// import Image52 from "../../assets/image-5-2@2x.png";
-// import Image42 from "../../assets/image-4-2@2x.png";
 import UndrawImage from "../../assets/undraw-in-thought-re-qyxl-1-2@2x.png";
 import arrowUp from "../../assets/arrow-up.svg";
 import { whiteLogo } from "../utility/constants";
 import { TextField, Typography, Button, Grid } from "@mui/material";
-// import { useAuth } from "../contexts/AuthContext";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -75,17 +70,32 @@ const Login = ({ ...props }) => {
         lg={4.5}
         xl={4.5}
       >
-        <Grid item style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+        <Grid
+          item
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <img
             src={whiteLogo}
             style={{
               width: "112.58px",
               height: "112.93px",
               cursor: "pointer",
-              marginTop: "14.27px"
+              marginTop: "14.27px",
             }}
           />
-          <h1  style={{display: "inline-block", verticalAlign: 'middle', fontSize: "50px"}}>Loggle</h1>
+          <h1
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              fontSize: "50px",
+            }}
+          >
+            Loggle
+          </h1>
         </Grid>
         <Grid item>
           <span
@@ -95,7 +105,7 @@ const Login = ({ ...props }) => {
               fontWeight: "normal",
               fontSize: "18px",
               color: "#000000",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             Real Time Log Analytics
@@ -195,43 +205,43 @@ const Login = ({ ...props }) => {
               Sign In
             </Button>
           </Grid>
-          <Grid item 
-          container
-          direction="row"
-          style={{
-            marginTop: "25px",
-            fontFamily: "Work Sans",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "18px",
-          }}
-          >
           <Grid
             item
+            container
+            direction="row"
             style={{
-              color: "#000000",
-              opacity: 0.5,
+              marginTop: "25px",
+              fontFamily: "Work Sans",
+              fontStyle: "normal",
+              fontWeight: "normal",
+              fontSize: "18px",
             }}
           >
-            <div>Don't have an account?</div>
-          </Grid>
-          <Grid item>
-            <a
+            <Grid
+              item
               style={{
-                cursor: "pointer",
-                color: "#3086dd",
-                fontWeight: "bold",
-                marginLeft: "10px",
-              }}
-              onClick={() => {
-                window.location.href = "/register";
+                color: "#000000",
+                opacity: 0.5,
               }}
             >
-              Sign Up Now
-            </a>
+              <div>Don't have an account?</div>
+            </Grid>
+            <Grid item>
+              <a
+                style={{
+                  cursor: "pointer",
+                  color: "#3086dd",
+                  fontWeight: "bold",
+                  marginLeft: "10px",
+                }}
+                onClick={() => {
+                  window.location.href = "/register";
+                }}
+              >
+                Sign Up Now
+              </a>
+            </Grid>
           </Grid>
-          </Grid>
-          
         </form>
         <Stack sx={{ width: "100%" }}>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

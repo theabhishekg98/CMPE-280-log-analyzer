@@ -31,34 +31,29 @@ const Navbar = ({ isBlack }) => {
       }}
     >
       <Grid item md={1.3} />
-      <Grid
-        item
-        container
-        md={2}
-        direction="row"
-      >
+      <Grid item container md={2} direction="row">
         <Grid item>
-        <img
-          src={isBlack ? blackLogo : whiteLogo}
+          <img
+            src={isBlack ? blackLogo : whiteLogo}
+            style={{
+              height: "50px",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          />
+        </Grid>
+        <Grid
+          item
           style={{
-            height:"50px",
-            cursor: "pointer",
+            margin: "5px",
+            fontSize: "30px",
+            fontFamily: "Roboto",
           }}
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        />
+        >
+          Loggle
         </Grid>
-        <Grid item
-        style={{
-          margin:"5px",
-          fontSize:"30px",
-          fontFamily:"Roboto"
-        }}>
-        Loggle
-        </Grid>
-       
-        
       </Grid>
       <Grid item md={6.3} />
       <Grid

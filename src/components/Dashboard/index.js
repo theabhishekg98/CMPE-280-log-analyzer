@@ -4,11 +4,8 @@ import Sidebar from "./Sidebar";
 import VideoLibrary from "./VideoLibrary";
 import { useState, useEffect } from "react";
 
-// const FileUploadThumbnail = require("file-upload-thumbnail");
 
 const Dashboard = () => {
-  const [collectionData, setCollectionData] = useState(null);
-  const [collectionUnsub, setCollectionUnsub] = useState({ f: null });
   const [itemData, setItemData] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [uploadModal, setUploadModal] = useState(false);
@@ -29,7 +26,6 @@ const Dashboard = () => {
         container
         direction="row"
         style={{
-          // background: "#F8F8F8",
           width: "100%",
         }}
       >
@@ -56,7 +52,6 @@ const Dashboard = () => {
               open={open}
               setOpen={setOpen}
               serverId={serverId}
-              // user={currentUser.uid}
             />
           </Grid>
         </Grid>

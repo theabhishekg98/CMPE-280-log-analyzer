@@ -1,11 +1,7 @@
 import React from "react";
 import { Menu, MenuItem, Typography, Divider } from "@mui/material";
-// import { ListItemIcon } from "@material-ui/core";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../contexts/AuthContext";
 import logoutIcon from "../../assets/log-out.svg";
-import settingsIcon from "../../assets/settings.svg";
-import helpIcon from "../../assets/help-circle.svg";
 
 const ProfileIconData = (props) => {
   // const { logout } = useAuth();
@@ -62,8 +58,7 @@ const ProfileIconData = (props) => {
               lineHeight: "26px",
               color: "rgba(33, 33, 33, 0.52)",
             }}
-          >
-            
+          > 
               <img src={logoutIcon} />
             Logout
           </MenuItem>
