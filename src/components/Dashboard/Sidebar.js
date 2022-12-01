@@ -1,8 +1,5 @@
 import { TextField, Typography, Modal, Button, Grid, Box} from "@mui/material";
-import playCircle from "../../assets/play-circle.svg";
-import trashIcon from "../../assets/trash.svg";
 import placeholder from "../../assets/placeholder.png";
-import { useEffect, useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,6 +16,17 @@ const Sidebar = (props) => {
     console.log(serverIP);
     console.log(serverName);
     console.log(serverPriority);
+    axios.post('http://localhost:8000/servers', {
+      userId: 1,
+      priority: serverPriority,
+      name: serverName
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
  const [open, setOpen] = React.useState(false);
@@ -58,8 +66,6 @@ const Sidebar = (props) => {
         </Grid>
       </Grid>
       <Grid item>{/* progress bar */}</Grid>
-
-      
 
       <Grid item>
              <Button

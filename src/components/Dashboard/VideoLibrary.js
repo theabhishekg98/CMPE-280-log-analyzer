@@ -76,7 +76,7 @@ export default function VideoLibrary(props) {
   const [chartData, setChartData] = React.useState(() => {
     axios
       .get("http://localhost:8000/servers/graphs/" + props.serverId)
-      .then((res) => setChartData(res.data));
+      .then((res) => setChartData(res.data.data));
   });
 
   useEffect(() => {
@@ -96,7 +96,8 @@ export default function VideoLibrary(props) {
         const res = await axios.get(
           `http://localhost:8000/servers/graphs/` + props.serverId
         );
-        setChartData(res.data);
+        setChartData(res.data.data);
+        console.log(res.data);
       } catch (e) {
         console.log(e);
       }
@@ -252,7 +253,7 @@ export default function VideoLibrary(props) {
             chartType="PieChart"
             width="500px"
             height="500px"
-            data={chartData && chartData.data.pie1}
+            data={chartData && chartData.pie1}
             options={options1}
           />
         </Grid>
@@ -262,7 +263,7 @@ export default function VideoLibrary(props) {
             chartType="PieChart"
             width="500px"
             height="500px"
-            data={chartData && chartData.data.pie2}
+            data={chartData && chartData.pie2}
             options={options2}
           />
         </Grid>
@@ -272,7 +273,7 @@ export default function VideoLibrary(props) {
           chartType="LineChart"
           width="100%"
           height="400px"
-          data={chartData && chartData.data.pie3}
+          data={chartData && chartData.pie3}
           options={options3}
         />
       </Grid>
