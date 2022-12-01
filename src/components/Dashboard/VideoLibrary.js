@@ -17,11 +17,26 @@ import { Chart } from "react-google-charts";
 import TablePagination from "@mui/material/TablePagination";
 
 export default function VideoLibrary(props) {
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("logId");
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+  useEffect(() => {
+    if (searchKeyword !== "") {
+      const searchedData = data.filter((log) => {
+        return log.level
+          .toLowerCase()
+          .includes(searchKeyword.toLowerCase());
+      });
+      setData(searchedData);
+    } else {
+      setData(ogData);
+    }
+  }, [searchKeyword]);
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -31,68 +46,53 @@ export default function VideoLibrary(props) {
     setPage(0);
   };
 
-  const pie1 = [
-    ["Task", "Hours per Day"],
-    ["Work", 11],
-    ["Eat", 2],
-    ["Commute", 2],
-    ["Watch TV", 2],
-    ["Sleep", 7], // CSS-style declaration
-  ];
-
   const options1 = {
     legend: "none",
     pieHole: 0.4,
     is3D: true,
   };
 
-  const pie2 = [
-    ["Task", "Hours per Day"],
-    ["Work", 11],
-    ["Eat", 2],
-    ["Commute", 2],
-    ["Watch TV", 2],
-    ["Sleep", 7], // CSS-style declaration
-  ];
-
   const options2 = {
     legend: "none",
     pieHole: 0.4,
-    is3D: false,
+    is3D: true,
   };
-
-  const line = [
-    ["Year", "Sales", "Expenses"],
-    ["2004", 1000, 400],
-    ["2005", 1170, 460],
-    ["2006", 660, 1120],
-    ["2007", 1030, 540],
-  ];
 
   const options3 = {
     curveType: "function",
     legend: { position: "bottom" },
   };
 
+  const [ogData, setOgData] = React.useState();
   const [data, setData] = React.useState(() => {
     axios
       .get("http://localhost:8000/logs/" + props.serverId)
-      .then((res) => setData(res.data));
+      .then((res) => {
+        setData(res.data.logs);
+        setOgData(res.data.logs);
+      });
+  });
+
+  const [chartData, setChartData] = React.useState(() => {
+    axios
+      .get("http://localhost:8000/servers/graphs/" + props.serverId)
+      .then((res) => setChartData(res.data));
   });
 
   useEffect(() => {
     console.log("useEffect called");
-    const getWeather = async () => {
+    const getLogData = async () => {
       try {
         const res = await axios.get(
           `http://localhost:8000/logs/` + props.serverId
         );
-        setData(res.data);
+        setData(res.data.logs);
+        setOgData(res.data.logs);
       } catch (e) {
         console.log(e);
       }
     };
-    getWeather();
+    getLogData();
   }, [props.serverId]);
 
   function descendingComparator(a, b, orderBy) {
@@ -149,7 +149,7 @@ export default function VideoLibrary(props) {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search Connections"
-              onChange={(e) => props.setSearchKeyword(e.target.value)}
+              onChange={(e) => setSearchKeyword(e.target.value)}
               inputProps={{ "aria-label": "search google maps" }}
             />
             <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
@@ -189,7 +189,7 @@ export default function VideoLibrary(props) {
           </TableHead>
           <TableBody>
             {data &&
-              stableSort(data.logs, getComparator(order, orderBy))
+              stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow
@@ -214,7 +214,7 @@ export default function VideoLibrary(props) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={data && data.logs.length}
+        count={data && data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -234,7 +234,7 @@ export default function VideoLibrary(props) {
             chartType="PieChart"
             width="500px"
             height="500px"
-            data={pie1}
+            data={chartData && chartData.data.pie1}
             options={options1}
           />
         </Grid>
@@ -244,7 +244,7 @@ export default function VideoLibrary(props) {
             chartType="PieChart"
             width="500px"
             height="500px"
-            data={pie2}
+            data={chartData && chartData.data.pie2}
             options={options2}
           />
         </Grid>
@@ -254,7 +254,7 @@ export default function VideoLibrary(props) {
           chartType="LineChart"
           width="100%"
           height="400px"
-          data={line}
+          data={chartData && chartData.data.pie3}
           options={options3}
         />
       </Grid>
