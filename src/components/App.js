@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import ForgetPassword from "./Login/forgetPassword";
 // import logo from './logo.png';
 import './App.css';
+import Register from "./Register";
 
 function App() {
   useEffect(() => {}, []);
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/ >}></Route>
           <Route path="/dashboard" element={<Dashboard/ >}></Route>
+          <Route path="/register" element={<Register/ >}></Route>
           {/* <Route path="/reset" component={ForgetPassword}></Route>
           <Route path="/dashboard">
             <PrivateRoute claim="verified">

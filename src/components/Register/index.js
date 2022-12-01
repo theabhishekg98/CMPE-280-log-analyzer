@@ -1,34 +1,30 @@
-import React, { useState } from "react";
-// import Image52 from "../../assets/image-5-2@2x.png";
-// import Image42 from "../../assets/image-4-2@2x.png";
+import React, { useState, useEffect } from "react";
+import Image52 from "../../assets/image-5-2@2x.png";
+import Image42 from "../../assets/image-4-2@2x.png";
 import UndrawImage from "../../assets/undraw-in-thought-re-qyxl-1-2@2x.png";
-import arrowUp from "../../assets/arrow-up.svg";
 import { whiteLogo } from "../utility/constants";
 import { TextField, Typography, Button, Grid } from "@mui/material";
 // import { useAuth } from "../contexts/AuthContext";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+// import { doc, getDoc, deleteDoc, collection, addDoc } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
+import arrowUp from "../../assets/arrow-up.svg";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Login = ({ ...props }) => {
+const Register = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [open, setOpen] = useState(false);
-  // const currentUser = useAuth().currentUser;
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [validInviteLink, setValidInviteLink] = useState(false);
 
-  // useEffect( ()=>{
-  //   if(currentUser && !props?.location?.state?.errorMessage) {window.location.href = "/dashboard";}
-  // },[]);
-
-  // const { login } = useAuth();
-
-  const errorMessage = props?.location?.state?.errorMessage;
+  // const { signup } = useAuth();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -37,22 +33,38 @@ const Login = ({ ...props }) => {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // login(email, password)
-    //   .then(() => {
-    //     if (props?.location?.state?.from.pathname) {
-    //       window.location.href = props.location.state.from.pathname;
-    //       if(props?.location?.state?.errorMessage) props.location.state.errorMessage = undefined;
-    //     } else {
-    //       window.location.href = "/dashboard";
+    // signup(email, password)
+    //   .then(async () => {
+    //     if (validInviteLink) {
+    //       const docId = new URLSearchParams(search).get("docId");
+    //       await deleteDoc(doc(db, "registrationRequests", docId));
     //     }
+    //     setOpen(true);
+    //     setSuccess("Successfully registered! Redirecting..");
+    //     setTimeout(() => {
+    //       window.location.href = "/";
+    //     }, 3000);
     //   })
     //   .catch((err) => {
     //     console.log(err);
+    //     setError(err.message);
     //     setOpen(true);
     //   });
   };
+
+  const handleSjsuLogin = (e) => {
+    e.preventDefault();
+    // To-Do: API Call for Sjsu SSO register
+  };
+
+  const handleFauLogin = (e) => {
+    e.preventDefault();
+    // To-Do: API Call for Fau SSO register
+  };
+
+  const search = useLocation().search;
 
   return (
     <Grid
@@ -90,26 +102,16 @@ const Login = ({ ...props }) => {
         <Grid item>
           <span
             style={{
-              fontFamily: "Time Sans",
+              fontFamily: "Work Sans",
               fontStyle: "normal",
               fontWeight: "normal",
               fontSize: "18px",
               color: "#000000",
-              alignItems: "center"
             }}
           >
-            Real Time Log Analytics
+           Real Time Log Analytics
           </span>
         </Grid>
-        <Snackbar
-          open={errorMessage}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <Alert severity="error" sx={{ width: "100%" }}>
-            {errorMessage}
-          </Alert>
-        </Snackbar>
         <Grid item>
           <Typography
             style={{
@@ -123,7 +125,7 @@ const Login = ({ ...props }) => {
               marginTop: "25px",
             }}
           >
-            Sign In
+            Sign Up
           </Typography>
         </Grid>
         <form onSubmit={handleSubmit}>
@@ -131,8 +133,8 @@ const Login = ({ ...props }) => {
             <TextField
               required
               type="email"
-              autoComplete="email"
               placeholder="Email Address"
+              disabled={validInviteLink ? true : false}
               value={email}
               style={{
                 width: "395px",
@@ -141,7 +143,7 @@ const Login = ({ ...props }) => {
                 borderRadius: "5px",
                 marginTop: "30px",
               }}
-              error={open ? true : false}
+              error={error != "" ? true : false}
               onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
@@ -149,7 +151,6 @@ const Login = ({ ...props }) => {
             <TextField
               required
               type="password"
-              autoComplete="current-password"
               placeholder="Password"
               style={{
                 width: "395px",
@@ -159,7 +160,7 @@ const Login = ({ ...props }) => {
                 marginTop: "5px",
               }}
               onChange={(e) => setPassword(e.target.value)}
-              error={open ? true : false}
+              error={error != "" ? true : false}
             />
           </Grid>
           <Grid item>
@@ -192,10 +193,12 @@ const Login = ({ ...props }) => {
                   margin: "0px 8px",
                 }}
               />
-              Sign In
+              Register
             </Button>
           </Grid>
-          <Grid item 
+        </form>
+                <Grid
+          item
           container
           direction="row"
           style={{
@@ -205,7 +208,7 @@ const Login = ({ ...props }) => {
             fontWeight: "normal",
             fontSize: "18px",
           }}
-          >
+        >
           <Grid
             item
             style={{
@@ -213,7 +216,7 @@ const Login = ({ ...props }) => {
               opacity: 0.5,
             }}
           >
-            <div>Don't have an account?</div>
+            <div>Already have an account?</div>
           </Grid>
           <Grid item>
             <a
@@ -224,23 +227,21 @@ const Login = ({ ...props }) => {
                 marginLeft: "10px",
               }}
               onClick={() => {
-                window.location.href = "/register";
+                window.location.href = "/";
               }}
             >
-              Sign Up Now
+              Sign In Now
             </a>
           </Grid>
-          </Grid>
-          
-        </form>
+        </Grid>
         <Stack sx={{ width: "100%" }}>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert
               onClose={handleClose}
-              severity="error"
+              severity={success ? "success" : "error"}
               sx={{ width: "100%" }}
             >
-              Invalid Username/Password
+              {success ? success : error}
             </Alert>
           </Snackbar>
         </Stack>
@@ -271,4 +272,4 @@ const Login = ({ ...props }) => {
   );
 };
 
-export default Login;
+export default Register;
