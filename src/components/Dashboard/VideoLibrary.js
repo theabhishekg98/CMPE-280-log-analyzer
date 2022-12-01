@@ -212,17 +212,26 @@ export default function VideoLibrary(props) {
                       backgroundColor: row.levelColor,
                       padding: "3px",
                       display: "inline-block",
-                      width: "55px"
+                      width: "55px",
+                      color: "#fff"
                     }}>{row.level}</span></TableCell>
                     <TableCell align="center"><span style={{
                       borderRadius: "5px",
                       backgroundColor: row.escalationColor,
                       padding: "3px",
                       display: "inline-block",
-                      width: "55px"
+                      width: "55px",
+                      color: "#fff"
                     }}>{row.escalation}</span></TableCell>
                     <TableCell align="center">{row.status}</TableCell>
-                    <TableCell align="center">{row.priority}</TableCell>
+                    <TableCell align="center"><span style={{
+                      borderRadius: "5px",
+                      backgroundColor: "blue",
+                      padding: "3px",
+                      display: "inline-block",
+                      width: "55px",
+                      color: "#fff"
+                    }}>{row.priority}</span></TableCell>
                     <TableCell align="center">{row.timestamp}</TableCell>
                   </TableRow>
                 ))}
