@@ -7,57 +7,37 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useLocation } from "react-router-dom";
 import arrowUp from "../../assets/arrow-up.svg";
+import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Register = () => {
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [validInviteLink, setValidInviteLink] = useState(false);
 
-  // const { signup } = useAuth();
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  function addUser() {
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    axios
+      .post("http://localhost:8000/users/register", {
+        name: name,
+        username: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // signup(email, password)
-    //   .then(async () => {
-    //     if (validInviteLink) {
-    //       const docId = new URLSearchParams(search).get("docId");
-    //       await deleteDoc(doc(db, "registrationRequests", docId));
-    //     }
-    //     setOpen(true);
-    //     setSuccess("Successfully registered! Redirecting..");
-    //     setTimeout(() => {
-    //       window.location.href = "/";
-    //     }, 3000);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setError(err.message);
-    //     setOpen(true);
-    //   });
-  };
-
-  const handleSjsuLogin = (e) => {
-    e.preventDefault();
-    // To-Do: API Call for Sjsu SSO register
-  };
-
-  const handleFauLogin = (e) => {
-    e.preventDefault();
-    // To-Do: API Call for Fau SSO register
   };
 
   const search = useLocation().search;
@@ -143,10 +123,10 @@ const Register = () => {
           <Grid item>
             <TextField
               required
-              type="email"
-              placeholder="Email Address"
-              disabled={validInviteLink ? true : false}
-              value={email}
+              type="name"
+              placeholder="Name"
+              // disabled={validInviteLink ? true : false}
+              value={name}
               style={{
                 width: "395px",
                 height: "67px",
@@ -154,7 +134,25 @@ const Register = () => {
                 borderRadius: "5px",
                 marginTop: "30px",
               }}
-              error={error != "" ? true : false}
+              // error={error != "" ? true : false}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              required
+              type="email"
+              placeholder="Email Address"
+              // disabled={validInviteLink ? true : false}
+              value={email}
+              style={{
+                width: "395px",
+                height: "67px",
+                boxSizing: "border-box",
+                borderRadius: "5px",
+                marginTop: "5px",
+              }}
+              // error={error != "" ? true : false}
               onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
@@ -171,7 +169,7 @@ const Register = () => {
                 marginTop: "5px",
               }}
               onChange={(e) => setPassword(e.target.value)}
-              error={error != "" ? true : false}
+              // error={error != "" ? true : false}
             />
           </Grid>
           <Grid item>
@@ -191,6 +189,7 @@ const Register = () => {
                 fontSize: "18px",
                 marginTop: "12px",
               }}
+              onClick={(e) => addUser(e.target)}
             >
               <img
                 src={arrowUp}
@@ -245,17 +244,7 @@ const Register = () => {
             </a>
           </Grid>
         </Grid>
-        <Stack sx={{ width: "100%" }}>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity={success ? "success" : "error"}
-              sx={{ width: "100%" }}
-            >
-              {success ? success : error}
-            </Alert>
-          </Snackbar>
-        </Stack>
+        <Stack sx={{ width: "100%" }}></Stack>
       </Grid>
       <Grid
         item
