@@ -91,7 +91,18 @@ export default function VideoLibrary(props) {
         console.log(e);
       }
     };
+    const getChartData = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/servers/graphs/` + props.serverId
+        );
+        setChartData(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     getLogData();
+    getChartData();
   }, [props.serverId]);
 
   function descendingComparator(a, b, orderBy) {
