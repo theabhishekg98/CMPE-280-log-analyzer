@@ -43,7 +43,7 @@ const ProfileIconData = (props) => {
               zIndex: 0,
             },
             width: "163px",
-            height: "128.5px",
+            height: "48.5px",
             background: "#FFFFFF",
             boxShadow:
               "0px 8px 10px rgba(0, 0, 0, 0.06), 0px 3px 14px rgba(0, 0, 0, 0.04), 0px 5px 5px rgba(0, 0, 0, 0.08)",
@@ -52,44 +52,6 @@ const ProfileIconData = (props) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Link to="/#" style={{ textDecoration: "none" }}>
-          <MenuItem
-            style={{
-              fontFamily: "Work Sans",
-              fontStyle: "normal",
-              fontWeight: 500,
-              fontSize: "16px",
-              lineHeight: "26px",
-              color: "rgba(33, 33, 33, 0.52)",
-            }}
-          >
-            {/* <ListItemIcon>
-              <img src={helpIcon} />
-            </ListItemIcon> */}
-            Help
-          </MenuItem>
-        </Link>
-
-        <Link to="/#" style={{ textDecoration: "none" }}>
-          <MenuItem
-            style={{
-              fontFamily: "Work Sans",
-              fontStyle: "normal",
-              fontWeight: 500,
-              fontSize: "16px",
-              lineHeight: "26px",
-              color: "rgba(33, 33, 33, 0.52)",
-            }}
-          >
-            {/* <ListItemIcon>
-              <img src={settingsIcon} />
-            </ListItemIcon> */}
-            Settings
-          </MenuItem>
-        </Link>
-
-        <Divider />
-
         <Link to="#" style={{ textDecoration: "none" }}>
           <MenuItem
             style={{
@@ -101,9 +63,8 @@ const ProfileIconData = (props) => {
               color: "rgba(33, 33, 33, 0.52)",
             }}
           >
-            {/* <ListItemIcon>
+            
               <img src={logoutIcon} />
-            </ListItemIcon> */}
             Logout
           </MenuItem>
         </Link>
