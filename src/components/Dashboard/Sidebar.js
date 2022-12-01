@@ -23,9 +23,11 @@ const Sidebar = (props) => {
     })
     .then(function (response) {
       console.log(response);
+      setOpen(false);
     })
     .catch(function (error) {
       console.log(error);
+      setOpen(false);
     });
   }
 
