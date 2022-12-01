@@ -4,18 +4,22 @@ import Dashboard from "../components/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Register from "./Register";
-
+import AuthProvider from "./AuthContext";
+ 
 function App() {
   useEffect(() => {}, []);
 
   return (
-    <Router>
+    <AuthProvider>
+        <Router>
         <Routes>
           <Route path="/" element={<Login/ >}></Route>
           <Route path="/dashboard" element={<Dashboard/ >}></Route>
           <Route path="/register" element={<Register/ >}></Route>
         </Routes>
       </Router>
+    </AuthProvider>
+    
   );
 }
 

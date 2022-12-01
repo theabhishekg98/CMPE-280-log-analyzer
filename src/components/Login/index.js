@@ -6,6 +6,7 @@ import { TextField, Typography, Button, Grid } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useAuth } from "../AuthContext";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -15,13 +16,6 @@ const Login = ({ ...props }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [open, setOpen] = useState(false);
-  // const currentUser = useAuth().currentUser;
-
-  // useEffect( ()=>{
-  //   if(currentUser && !props?.location?.state?.errorMessage) {window.location.href = "/dashboard";}
-  // },[]);
-
-  // const { login } = useAuth();
 
   const errorMessage = props?.location?.state?.errorMessage;
 
@@ -32,21 +26,18 @@ const Login = ({ ...props }) => {
     setOpen(false);
   };
 
+  const { login } = useAuth();
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // login(email, password)
-    //   .then(() => {
-    //     if (props?.location?.state?.from.pathname) {
-    //       window.location.href = props.location.state.from.pathname;
-    //       if(props?.location?.state?.errorMessage) props.location.state.errorMessage = undefined;
-    //     } else {
-    //       window.location.href = "/dashboard";
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setOpen(true);
-    //   });
+    login(email, password)
+    .then(() => {
+      debugger;
+      console.log("Success?");
+      window.location.href = "/dashboard";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
