@@ -75,28 +75,29 @@ const Login = ({ ...props }) => {
         lg={4.5}
         xl={4.5}
       >
-        <Grid item>
+        <Grid item style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
           <img
             src={whiteLogo}
             style={{
-              width: "239.58px",
+              width: "112.58px",
               height: "112.93px",
               cursor: "pointer",
-              marginTop: "84.27px",
+              marginTop: "14.27px"
             }}
           />
+          <h1  style={{display: "inline-block", verticalAlign: 'middle', fontSize: "50px"}}>Loggle</h1>
         </Grid>
         <Grid item>
           <span
             style={{
-              fontFamily: "Work Sans",
+              fontFamily: "Time Sans",
               fontStyle: "normal",
               fontWeight: "normal",
               fontSize: "18px",
               color: "#000000",
             }}
           >
-            Hiding PII has never been that easy.
+            Real Time Log Analytics
           </span>
         </Grid>
         <Snackbar
