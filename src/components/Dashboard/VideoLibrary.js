@@ -181,7 +181,10 @@ export default function VideoLibrary(props) {
           <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: 700 }} align="center">
-                {"Log Id"}
+                {"Id"}
+              </TableCell>
+              <TableCell style={{ fontWeight: 700 }} align="center">
+                {"Message"}
               </TableCell>
               <TableCell style={{ fontWeight: 700 }} align="center">
                 {"Level"}
@@ -210,6 +213,7 @@ export default function VideoLibrary(props) {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="center">{row.logId}</TableCell>
+                    <TableCell align="center">{row.message}</TableCell>
                     <TableCell align="center"><span style={{
                       borderRadius: "5px",
                       backgroundColor: row.levelColor,
@@ -235,7 +239,7 @@ export default function VideoLibrary(props) {
                       width: "55px",
                       color: "#fff"
                     }}>{row.priority}</span></TableCell>
-                    <TableCell align="center">{row.timestamp}</TableCell>
+                    <TableCell align="center">{row.Date}</TableCell>
                   </TableRow>
                 ))}
           </TableBody>
