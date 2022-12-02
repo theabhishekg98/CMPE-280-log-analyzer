@@ -1,4 +1,4 @@
-import { Typography, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,12 +21,17 @@ export default function VideoLibrary(props) {
   const [orderBy, setOrderBy] = React.useState("logId");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [userData, setUserData] = useState(localStorage.getItem("userData"));
 
   useEffect(() => {
     if (searchKeyword !== "") {
       const searchedData = data.filter((log) => {
-        return log.message.toLowerCase().includes(searchKeyword.toLowerCase());
+        return (
+          log.message.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+          log.level.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+          log.escalation.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+          log.status.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+          log.priority.toLowerCase().includes(searchKeyword.toLowerCase())
+        );
       });
       setData(searchedData);
     } else {
@@ -234,7 +239,21 @@ export default function VideoLibrary(props) {
                         {row.escalation}
                       </span>
                     </TableCell>
-                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">
+                      <span
+                        style={{
+                          borderRadius: "5px",
+                          backgroundColor:
+                            row.status === "On" ? "green" : "red",
+                          padding: "3px",
+                          display: "inline-block",
+                          width: "55px",
+                          color: "#fff",
+                        }}
+                      >
+                        {row.status}
+                      </span>
+                    </TableCell>
                     <TableCell align="center">
                       <span
                         style={{

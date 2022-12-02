@@ -17,7 +17,7 @@ const Sidebar = (props) => {
         userId: currentUser.userId,
         priority: serverPriority,
         name: serverName,
-        ip: serverIP
+        ip: serverIP,
       })
       .then(function (response) {
         console.log(response);
@@ -208,7 +208,10 @@ const Sidebar = (props) => {
           data.map((row, index) => (
             <Button
               style={{
-                backgroundColor: row.serverId===props.serverId ? "rgba(33, 33, 33, 0.2)" : "",
+                backgroundColor:
+                  row.serverId === props.serverId
+                    ? "rgba(33, 33, 33, 0.2)"
+                    : "",
                 width: "269px",
                 height: "52px",
                 fontFamily: "Work Sans",
@@ -216,7 +219,10 @@ const Sidebar = (props) => {
                 fontWeight: 500,
                 fontSize: "16px",
                 lineHeight: "24px",
-                color: row.serverId===props.serverId ? "rgba(33, 33, 33, 0.52)" : "rgba(33, 33, 33, 0.52)",
+                color:
+                  row.serverId === props.serverId
+                    ? "rgba(33, 33, 33, 0.52)"
+                    : "rgba(33, 33, 33, 0.52)",
                 textTransform: "none",
                 justifyContent: "flex-start",
               }}
