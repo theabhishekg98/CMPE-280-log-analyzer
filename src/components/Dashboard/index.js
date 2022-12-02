@@ -28,7 +28,7 @@ const Dashboard = (props) => {
       >
         <Grid item md={1.3} />
         <Grid item md={2.5}>
-          <Sidebar setServerId={setServerId} />
+          <Sidebar setServerId={setServerId} serverId={serverId} />
         </Grid>
         <Grid item container direction="column" md={6.9}>
           <Grid

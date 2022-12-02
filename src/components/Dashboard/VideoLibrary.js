@@ -26,7 +26,7 @@ export default function VideoLibrary(props) {
   useEffect(() => {
     if (searchKeyword !== "") {
       const searchedData = data.filter((log) => {
-        return log.level.toLowerCase().includes(searchKeyword.toLowerCase());
+        return log.message.toLowerCase().includes(searchKeyword.toLowerCase());
       });
       setData(searchedData);
     } else {
@@ -239,7 +239,7 @@ export default function VideoLibrary(props) {
                       <span
                         style={{
                           borderRadius: "5px",
-                          backgroundColor: "blue",
+                          backgroundColor: row.priorityColor,
                           padding: "3px",
                           display: "inline-block",
                           width: "55px",
