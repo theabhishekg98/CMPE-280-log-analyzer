@@ -4,8 +4,7 @@ import Sidebar from "./Sidebar";
 import VideoLibrary from "./VideoLibrary";
 import { useState, useEffect } from "react";
 
-
-const Dashboard = () => {
+const Dashboard = (props) => {
   const [itemData, setItemData] = useState(null);
   const [uploadModal, setUploadModal] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -13,8 +12,7 @@ const Dashboard = () => {
   const [thumbnailURI, setThumbnailURI] = useState(null);
   const [serverId, setServerId] = useState(0);
   const [open, setOpen] = useState(false);
-
-
+  // var userData = localStorage.getItem("userData");
   return (
     <Grid container direction="column">
       <Grid item container>
@@ -30,7 +28,7 @@ const Dashboard = () => {
       >
         <Grid item md={1.3} />
         <Grid item md={2.5}>
-          <Sidebar setServerId = {setServerId}/>
+          <Sidebar setServerId={setServerId} />
         </Grid>
         <Grid item container direction="column" md={6.9}>
           <Grid
@@ -38,8 +36,7 @@ const Dashboard = () => {
             style={{
               marginTop: "75px",
             }}
-          >
-          </Grid>
+          ></Grid>
           <Grid item container>
             <VideoLibrary
               itemData={itemData}

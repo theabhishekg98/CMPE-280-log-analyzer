@@ -1,5 +1,4 @@
 import { Typography, Grid } from "@mui/material";
-import ImageList from "@mui/material/ImageList";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,7 +14,6 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { Chart } from "react-google-charts";
 import TablePagination from "@mui/material/TablePagination";
-import { useAuth } from "../AuthContext";
 
 export default function VideoLibrary(props) {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -23,22 +21,18 @@ export default function VideoLibrary(props) {
   const [orderBy, setOrderBy] = React.useState("logId");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { currentUser } = useAuth();
-
+  const [userData, setUserData] = useState(localStorage.getItem("userData"));
 
   useEffect(() => {
     if (searchKeyword !== "") {
       const searchedData = data.filter((log) => {
-        return log.level
-          .toLowerCase()
-          .includes(searchKeyword.toLowerCase());
+        return log.level.toLowerCase().includes(searchKeyword.toLowerCase());
       });
       setData(searchedData);
     } else {
       setData(ogData);
     }
   }, [searchKeyword]);
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -67,12 +61,10 @@ export default function VideoLibrary(props) {
 
   const [ogData, setOgData] = React.useState();
   const [data, setData] = React.useState(() => {
-    axios
-      .get("http://localhost:8000/logs/" + props.serverId)
-      .then((res) => {
-        setData(res.data.logs);
-        setOgData(res.data.logs);
-      });
+    axios.get("http://localhost:8000/logs/" + props.serverId).then((res) => {
+      setData(res.data.logs);
+      setOgData(res.data.logs);
+    });
   });
 
   const [chartData, setChartData] = React.useState(() => {
@@ -214,31 +206,49 @@ export default function VideoLibrary(props) {
                   >
                     <TableCell align="center">{row.logId}</TableCell>
                     <TableCell align="center">{row.message}</TableCell>
-                    <TableCell align="center"><span style={{
-                      borderRadius: "5px",
-                      backgroundColor: row.levelColor,
-                      padding: "3px",
-                      display: "inline-block",
-                      width: "55px",
-                      color: "#fff"
-                    }}>{row.level}</span></TableCell>
-                    <TableCell align="center"><span style={{
-                      borderRadius: "5px",
-                      backgroundColor: row.escalationColor,
-                      padding: "3px",
-                      display: "inline-block",
-                      width: "55px",
-                      color: "#fff"
-                    }}>{row.escalation}</span></TableCell>
+                    <TableCell align="center">
+                      <span
+                        style={{
+                          borderRadius: "5px",
+                          backgroundColor: row.levelColor,
+                          padding: "3px",
+                          display: "inline-block",
+                          width: "55px",
+                          color: "#fff",
+                        }}
+                      >
+                        {row.level}
+                      </span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span
+                        style={{
+                          borderRadius: "5px",
+                          backgroundColor: row.escalationColor,
+                          padding: "3px",
+                          display: "inline-block",
+                          width: "55px",
+                          color: "#fff",
+                        }}
+                      >
+                        {row.escalation}
+                      </span>
+                    </TableCell>
                     <TableCell align="center">{row.status}</TableCell>
-                    <TableCell align="center"><span style={{
-                      borderRadius: "5px",
-                      backgroundColor: "blue",
-                      padding: "3px",
-                      display: "inline-block",
-                      width: "55px",
-                      color: "#fff"
-                    }}>{row.priority}</span></TableCell>
+                    <TableCell align="center">
+                      <span
+                        style={{
+                          borderRadius: "5px",
+                          backgroundColor: "blue",
+                          padding: "3px",
+                          display: "inline-block",
+                          width: "55px",
+                          color: "#fff",
+                        }}
+                      >
+                        {row.priority}
+                      </span>
+                    </TableCell>
                     <TableCell align="center">{row.Date}</TableCell>
                   </TableRow>
                 ))}

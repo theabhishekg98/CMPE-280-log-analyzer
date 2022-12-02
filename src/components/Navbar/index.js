@@ -2,14 +2,13 @@ import { whiteLogo, blackLogo } from "../utility/constants";
 import avatar from "../../assets/avatar4.svg";
 import { Typography, Grid } from "@mui/material";
 import ProfileIconData from "./ProfileIconData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import placeholder from "../../assets/placeholder.png";
-import { useAuth } from "../AuthContext";
 
 const Navbar = ({ isBlack }) => {
-  const { currentUser } = useAuth();
-
   const [anchorEl, setAnchorEl] = useState(null);
+  const [currentUser, setCurrentUser] = useState("Praddy");
+
   const open = Boolean(anchorEl);
   const backgroundColor = isBlack ? "#171717" : "#FFFFFF";
   const textColor = isBlack ? "#FFFFFF" : "#171717";
@@ -20,6 +19,12 @@ const Navbar = ({ isBlack }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log(userData);
+    setCurrentUser(userData);
+  }, []);
 
   return (
     <Grid
@@ -88,7 +93,7 @@ const Navbar = ({ isBlack }) => {
               paddingRight: "10px",
             }}
           >
-            {"Hello!"}
+            {"Hello " + currentUser.name + "!"}
           </Typography>
         </Grid>
         <Grid

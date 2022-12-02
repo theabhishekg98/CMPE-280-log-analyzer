@@ -25,8 +25,8 @@ const Login = ({ ...props }) => {
     setOpen(false);
   };
 
-  const { setCurrentUser } = useAuth();
-
+  // const { setCurrentUser } = useAuth();
+  const [userId, setUserId] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -39,8 +39,12 @@ const Login = ({ ...props }) => {
       })
       .then(function (response) {
         // debugger;
-        console.log(response);
-        setCurrentUser(email);
+        // console.log("fcskkdskskskskskdsks");
+        console.log(response.data.user);
+        var userData = response.data.user;
+        localStorage.setItem("userData", JSON.stringify(userData));
+        // setUserId(response.data.userId);
+        // setCurrentUser(email);
         window.location.href = "/dashboard";
       })
       .catch(function (error) {
